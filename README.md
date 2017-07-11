@@ -10,4 +10,4 @@
    
 ![Alt text](https://github.com/Wang454431208/ijkPlayer/blob/master/ijkPlayer自定义/9E1581A2-32E8-4692-92C0-FFF8BC1A3A73.png)
 
-![Alt text](https://github.com/Wang454431208/ijkPlayer/blob/master/ijkPlayer自定义/9E1581A2-32E8-4692-92C0-FFF8BC1A3A73.png)
+![Alt text](https://github.com/Wang454431208/ijkPlayer/blob/master/ijkPlayer自定义/EF7F5C8A-F7D2-4BF5-95D5-FD1B25BFBA80.png)

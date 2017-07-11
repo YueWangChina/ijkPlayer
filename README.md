@@ -6,3 +6,8 @@
     [self.view addSubview:_playerView];
     代理自己实现 。我也不多说了
    写的 不是很好，只是完成了简单的一些功能。如有建议，请给我留言。大家共同学习，共同进步！
+   
+   
+![Alt text](https://github.com/Wang454431208/ijkPlayer/blob/master/ijkPlayer自定义/9E1581A2-32E8-4692-92C0-FFF8BC1A3A73.png)
+
+![Alt text](https://github.com/Wang454431208/ijkPlayer/blob/master/ijkPlayer自定义/9E1581A2-32E8-4692-92C0-FFF8BC1A3A73.png)

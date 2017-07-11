@@ -8,14 +8,8 @@
 
 #import "SYMediaPlayerView.h"
 #import "UIView+SYExtend.h"
-
-
 #import "UIImageView+WebCache.h"
-
-
 #define IMAGE_PlaceHolder @"Default"
-
-
 @interface SYMediaPlayerView()<SYMediaControlDelegate>
 
 @property (nonatomic, strong)UIView     *view;
@@ -41,19 +35,14 @@
     if (self) {
         self.title = title;
         self.url = url;
-        self.view = [[UIView alloc] initWithFrame:self.bounds];
-        self.view.backgroundColor = [UIColor darkGrayColor];
+
         [self addSubview:self.view];
         
-        
-        
-        self.mediaControl = [[SYMediaControl alloc] initWithFrame:self.bounds];
-        self.mediaControl.titleLabel.text = self.title;
-        self.mediaControl.delegate = self;
+
         
         [self.view addSubview:self.mediaControl];
         [self onClickPlayButton:nil];
-        
+
     }
     
     
@@ -62,6 +51,45 @@
 }
 
 
+-(void)playerViewWithUrl:(NSString*)urlString WithTitle:(NSString*)title WithView:(UIView*)view WithDelegate:(UIViewController*)viewController{
+    
+    
+    
+    
+    _beginPlay=NO;
+    self.frame=CGRectMake(0, 0, view.width, view.height);
+    self.title = title;
+    self.url = [NSURL URLWithString:urlString];
+
+    [self addSubview:self.view];
+
+    [self.view addSubview:self.mediaControl];
+    [view addSubview:self];
+    self.delegate=viewController;
+    [self onClickPlayButton:nil];
+}
+-(void)setTitle:(NSString *)title{
+    _title=title;
+    self.mediaControl.titleLabel.text = self.title;
+}
+-(UIView*)view{
+    if (!_view) {
+        _view = [[UIView alloc] initWithFrame:self.bounds];
+        _view.backgroundColor = [UIColor darkGrayColor];
+    }
+    
+    return _view;
+    
+}
+-(SYMediaControl*)mediaControl{
+    if (!_mediaControl) {
+        _mediaControl = [[SYMediaControl alloc] initWithFrame:self.bounds];
+//        _mediaControl.titleLabel.text = self.title;
+        _mediaControl.delegate = self;
+    }
+      
+    return _mediaControl;
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -139,6 +167,14 @@
     
     IJKFFOptions *options = [IJKFFOptions optionsByDefault];
     
+    if (self.player) {
+        [self.player shutdown];
+        [self.player.view removeFromSuperview];
+
+        self.player=nil;
+    }
+    
+//    self.pushPlayerPause=NO;
     self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:self.url withOptions:options];
     self.player.view.frame = self.view.bounds;
     self.player.scalingMode = IJKMPMovieScalingModeAspectFit;
@@ -147,8 +183,9 @@
     [self.view  insertSubview:self.player.view belowSubview:self.mediaControl];
     
     self.mediaControl.delegatePlayer = self.player;
-    
+  
 }
+
 
 - (void)setIsFullScreen:(BOOL)isFullScreen
 {
@@ -262,9 +299,7 @@
 
 - (void)moviePlayBackDidFinish:(NSNotification*)notification
 {
-    //    MPMovieFinishReasonPlaybackEnded,
-    //    MPMovieFinishReasonPlaybackError,
-    //    MPMovieFinishReasonUserExited
+
     int reason = [[[notification userInfo] valueForKey:IJKMPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
     
     switch (reason)
@@ -356,6 +391,11 @@
         NSLog(@"检测的一次播放状态错误");
         [self.player play];
     }
+    if (self.pushPlayerPause) {
+        [self.player pause];
+    }
+    
+    
 }
 
 #pragma mark Install Movie Notifications
@@ -401,6 +441,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:IJKMPMoviePlayerPlaybackDidFinishNotification object:_player];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:IJKMPMediaPlaybackIsPreparedToPlayDidChangeNotification object:_player];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:IJKMPMoviePlayerPlaybackStateDidChangeNotification object:_player];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 

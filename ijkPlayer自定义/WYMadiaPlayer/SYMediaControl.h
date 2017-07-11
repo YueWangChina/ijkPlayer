@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "SYMediaGesturesView.h"
 @protocol IJKMediaPlayback;
 
 
@@ -101,6 +102,8 @@ typedef NS_ENUM(NSUInteger, Direction) {
 
 @property (nonatomic, strong, readonly) UIView    *overlayPanel;
 
+
+@property (nonatomic, strong, readonly) SYMediaGesturesView  *gesturesView;
 
 @property (nonatomic, strong, readonly) UIView    *topPanel;
 @property (nonatomic, strong, readonly) UIButton  *closeBtn;

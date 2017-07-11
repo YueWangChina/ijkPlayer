@@ -29,7 +29,6 @@
  */
 - (void)playerViewFailePlay:(SYMediaPlayerView *)player;
 
-@optional
 - (BOOL)playerViewWillBeginPlay:(SYMediaPlayerView *)player;
 
 @end
@@ -38,20 +37,25 @@
 @interface SYMediaPlayerView : UIView
 
 
-@property (atomic, weak)   id<SYMediaPlayerViewDelegate> delegate;
-@property (atomic, retain) id<IJKMediaPlayback>   player;
+@property (nonatomic, weak)   id<SYMediaPlayerViewDelegate> delegate;
+@property (nonatomic, strong) id<IJKMediaPlayback>   player;
 @property (nonatomic, strong) SYMediaControl   *mediaControl;
 @property (nonatomic, assign) BOOL              shouldAutoplay;
 @property (nonatomic, assign) BOOL              isFullScreen;
+@property (nonatomic, assign) BOOL              pushPlayerPause;//是否push到下个界面
+
 
 
 - (instancetype)initWithFrame:(CGRect)frame uRL:(NSURL *)url title:(NSString *)title;
-
+-(void)playerViewWithUrl:(NSString*)urlString WithTitle:(NSString*)title WithView:(UIView*)view WithDelegate:(UIViewController*)viewController;
 - (void)setIsFullScreen:(BOOL)isFullScreen;
 
 
 - (void)playerWillShow;
 - (void)playerWillHide;
+
+
+
 
 /**
  *  预览图

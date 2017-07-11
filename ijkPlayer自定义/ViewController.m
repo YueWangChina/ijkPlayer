@@ -23,17 +23,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDWidth, MinPlayerHeight + TopMargin)];
-    //    _headerView.backgroundColor = [UIColor blackColor];
-    //
-    //    [self.view addSubview:_headerView];
     
-    NSString *mvUrl = @"http://7rfkz6.com1.z0.glb.clouddn.com/480p_150902_jianguoshouji.mp4";
+    NSString *mvUrl = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8";
     
-    _playerView = [[SYMediaPlayerView alloc] initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight) uRL:[NSURL URLWithString:mvUrl] title:@"这是视频标题"];
-    _playerView.delegate=self;
-    [self.view addSubview:_playerView];
+//    _playerView = [[SYMediaPlayerView alloc] initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight) uRL:[NSURL URLWithString:mvUrl] title:@"这是视频标题"];
+//    _playerView.delegate=self;
+//    [self.view addSubview:_playerView];
+    
+    _headerView =[[UIView alloc]initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight)];
+    _headerView.backgroundColor=[UIColor redColor];
+    [self.view addSubview:_headerView];
+    
+    SYMediaPlayerView *playerView=[[SYMediaPlayerView alloc]init];
+    
+    
+    
+    [playerView playerViewWithUrl:mvUrl WithTitle:@"这是视频标题" WithView:_headerView  WithDelegate:self];
+    
+    
 }
 
 

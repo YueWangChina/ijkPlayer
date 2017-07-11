@@ -44,7 +44,7 @@
 
 @property (nonatomic, strong) UIButton  *fullScreenBtn;
 
-
+@property (nonatomic, strong) SYMediaGesturesView  *gesturesView;
 @property (nonatomic, strong) UIButton  *hudInfoBtn;
 @property (nonatomic, strong) UIButton  *centerPlayBtn;
 
@@ -77,16 +77,17 @@
     }
     return _volumeView;
 }
-//触摸开始
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    //获取触摸开始的坐标
-    UITouch *touch = [touches anyObject];
-    CGPoint currentP = [touch locationInView:self];
-    
-    NSLog(@"获取触摸坐标%@",NSStringFromCGPoint(currentP));
+#pragma mark-- SYMediaGesturesViewdelegate 代理
+//移动
+-(void)touchesMovedWith:(CGPoint)point{
+    [self touchesMoveWithPoint:point];
+
+   
+}
+//开始
+-(void)touchesBeganWith:(CGPoint)point{
     //记录首次触摸坐标
-    self.startPoint = currentP;
+    self.startPoint = point;
     //检测用户是触摸屏幕的左边还是右边，以此判断用户是要调节音量还是亮度，左边是音量，右边是亮度
     if (self.startPoint.x <= self.frame.size.width / 2.0) {
         //音/量
@@ -103,26 +104,7 @@
     //    [self.touchDelegate touchesBeganWithPoint:currentP];
 }
 
-//触摸结束
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    UITouch *touch = [touches anyObject];
-    CGPoint currentP = [touch locationInView:self];
-    NSLog(@"获取触摸结束坐标%@",NSStringFromCGPoint(currentP));
-    //    [self.touchDelegate touchesEndWithPoint:currentP];
-}
 
-//移动
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint currentP = [touch locationInView:self];
-    NSLog(@"获取移动坐标%@",NSStringFromCGPoint(currentP));
-    [self touchesMoveWithPoint:currentP];
-    
-    
-    
-    
-}
 - (void)touchesMoveWithPoint:(CGPoint)point {
     if (self.delegatePlayer==nil) {
         return;
@@ -376,14 +358,7 @@
     });
     [self.topPanel addSubview:self.closeBtn];
     
-    self.titleLabel = ({
-        
-        UILabel *title = [[UILabel alloc] init];
-        title.font = [UIFont systemFontOfSize:14];
-        [title setTextColor:[UIColor whiteColor]];
-        title;
-        
-    });
+
     [self.topPanel addSubview:self.titleLabel];
     
     if (self.fullScreenBtn.selected==YES) {
@@ -423,7 +398,7 @@
     self.currentTimeLabel  = ({
         
         UILabel *label	= [[UILabel alloc] init];
-        label.font		= [UIFont systemFontOfSize:10];
+        label.font		= [UIFont systemFontOfSize:8];
         label.textAlignment = NSTextAlignmentCenter;
         [label setTextColor:[UIColor whiteColor]];
         
@@ -435,7 +410,7 @@
     self.totalDurationLabel = ({
         
         UILabel *label	= [[UILabel alloc] init];
-        label.font		= [UIFont systemFontOfSize:10];
+        label.font		= [UIFont systemFontOfSize:8];
         label.textAlignment = NSTextAlignmentCenter;
         [label setTextColor:[UIColor whiteColor]];
         
@@ -450,7 +425,7 @@
         UISlider *slider = [[UISlider alloc] init];
         slider.minimumValue = 0.0;
         slider.maximumValue = 1.0;
-        [slider setThumbImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+        [slider setThumbImage:[UIImage imageNamed:@"icon_progress"] forState:UIControlStateNormal];
         [slider addTarget:self action:@selector(slideTouchDown) forControlEvents:UIControlEventTouchDown];
         [slider addTarget:self action:@selector(slideTouchCancel) forControlEvents:UIControlEventTouchCancel | UIControlEventTouchUpOutside];
         [slider addTarget:self action:@selector(slideTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
@@ -463,7 +438,8 @@
     });
     [self.bottomPanel addSubview:self.mediaProgressSlider];
     
-    
+
+ //全屏按钮
     self.fullScreenBtn = ({
         UIButton *btn		= [[UIButton alloc] init];
         [btn setImage:[UIImage imageNamed:@"icon_full"] forState:UIControlStateNormal];
@@ -489,10 +465,32 @@
     });
     [self.overlayPanel addSubview:self.activiteView];
     
+
+    self.gesturesView = ({
+        
+        SYMediaGesturesView *view =[SYMediaGesturesView new];
+        view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0];
+
+        
+        view;
+        
+        
+    });
+            self.gesturesView.delegate=self;
     
+       [self.overlayPanel addSubview:self.gesturesView];
+}
+-(UILabel *)titleLabel{
+    
+    if (!_titleLabel) {
+        _titleLabel=[[UILabel alloc]init];
+        _titleLabel.font = [UIFont systemFontOfSize:14];
+        [_titleLabel setTextColor:[UIColor whiteColor]];
+ 
+    }
+    return _titleLabel;
     
 }
-
 - (void)layoutSubviews
 {
     
@@ -525,7 +523,7 @@
     
     // bottom
     self.bottomPanel.frame = CGRectMake(0,self.height - HEAD_H, mWidth, HEAD_H);
-    
+    self.gesturesView.frame=CGRectMake(0, topHeight, mWidth, self.height-topHeight-HEAD_H);
     
     self.playButton.frame = CGRectMake(MARGIN, MARGIN, BTN_H, BTN_H);
     self.fullScreenBtn.frame = CGRectMake(mWidth - HEAD_H, 0, HEAD_H, HEAD_H);
@@ -553,11 +551,7 @@
     self.activiteView.center = self.overlayPanel.insideCenter;
     
     
-    //    if (self.player.isFullScreen && self.bounds.size.width > 500) {
-    //        self.headerView.hidden = NO;
-    //    } else {
-    //        self.headerView.hidden = YES;
-    //    }
+
     
     
     

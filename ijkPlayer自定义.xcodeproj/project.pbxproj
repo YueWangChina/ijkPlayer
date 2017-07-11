@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D6F871F1F14D6FB00B97403 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6F871E1F14D6FB00B97403 /* libc++.1.tbd */; };
+		6D6F87211F14D70A00B97403 /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6F87201F14D70A00B97403 /* libbz2.1.0.tbd */; };
+		6D7D05941F14D9C7004D50F2 /* SYMediaGesturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D05931F14D9C7004D50F2 /* SYMediaGesturesView.m */; };
 		897AEB501DBA092300B5166E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AEB4F1DBA092300B5166E /* main.m */; };
 		897AEB531DBA092300B5166E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AEB521DBA092300B5166E /* AppDelegate.m */; };
 		897AEB561DBA092300B5166E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AEB551DBA092300B5166E /* ViewController.m */; };
@@ -70,6 +73,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D6F871E1F14D6FB00B97403 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		6D6F87201F14D70A00B97403 /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
+		6D7D05921F14D9C7004D50F2 /* SYMediaGesturesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMediaGesturesView.h; sourceTree = "<group>"; };
+		6D7D05931F14D9C7004D50F2 /* SYMediaGesturesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMediaGesturesView.m; sourceTree = "<group>"; };
 		897AEB4B1DBA092300B5166E /* ijkPlayer自定义.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ijkPlayer自定义.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		897AEB4F1DBA092300B5166E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		897AEB511DBA092300B5166E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -148,6 +155,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D6F87211F14D70A00B97403 /* libbz2.1.0.tbd in Frameworks */,
+				6D6F871F1F14D6FB00B97403 /* libc++.1.tbd in Frameworks */,
 				897AEBED1DBA0D0900B5166E /* libz.1.1.3.tbd in Frameworks */,
 				897AEB821DBA096700B5166E /* IJKMediaFramework.framework in Frameworks */,
 			);
@@ -239,6 +248,8 @@
 		897AEB941DBA0BFB00B5166E /* WYMadiaPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				6D7D05921F14D9C7004D50F2 /* SYMediaGesturesView.h */,
+				6D7D05931F14D9C7004D50F2 /* SYMediaGesturesView.m */,
 				897AEB961DBA0BFB00B5166E /* SYMediaControl.h */,
 				897AEB971DBA0BFB00B5166E /* SYMediaControl.m */,
 				897AEBB41DBA0C3900B5166E /* SYMediaPlayerView.h */,
@@ -314,6 +325,8 @@
 		897AEBEB1DBA0D0900B5166E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D6F87201F14D70A00B97403 /* libbz2.1.0.tbd */,
+				6D6F871E1F14D6FB00B97403 /* libc++.1.tbd */,
 				897AEBEC1DBA0D0900B5166E /* libz.1.1.3.tbd */,
 			);
 			name = Frameworks;
@@ -386,7 +399,7 @@
 				TargetAttributes = {
 					897AEB4A1DBA092300B5166E = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 5K7Q2CX7N7;
+						DevelopmentTeam = W743Y9P3MJ;
 						ProvisioningStyle = Automatic;
 					};
 					897AEB631DBA092300B5166E = {
@@ -470,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				897AEBB61DBA0C3900B5166E /* SYMediaPlayerView.m in Sources */,
+				6D7D05941F14D9C7004D50F2 /* SYMediaGesturesView.m in Sources */,
 				897AEBE21DBA0CC500B5166E /* SDWebImageManager.m in Sources */,
 				897AEBDD1DBA0CC500B5166E /* SDImageCache.m in Sources */,
 				897AEBE11DBA0CC500B5166E /* SDWebImageDownloaderOperation.m in Sources */,
@@ -637,7 +651,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5K7Q2CX7N7;
+				DEVELOPMENT_TEAM = W743Y9P3MJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ijkPlayer自定义",
@@ -645,6 +659,7 @@
 				INFOPLIST_FILE = "ijkPlayer自定义/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = cc.hopechina.UpeduBar112.aaaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -654,7 +669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5K7Q2CX7N7;
+				DEVELOPMENT_TEAM = W743Y9P3MJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ijkPlayer自定义",
@@ -662,6 +677,7 @@
 				INFOPLIST_FILE = "ijkPlayer自定义/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = cc.hopechina.UpeduBar112.aaaa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -736,6 +752,7 @@
 				897AEB7A1DBA092300B5166E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		897AEB7B1DBA092300B5166E /* Build configuration list for PBXNativeTarget "ijkPlayer自定义Tests" */ = {
 			isa = XCConfigurationList;
@@ -744,6 +761,7 @@
 				897AEB7D1DBA092300B5166E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		897AEB7E1DBA092300B5166E /* Build configuration list for PBXNativeTarget "ijkPlayer自定义UITests" */ = {
 			isa = XCConfigurationList;
@@ -752,6 +770,7 @@
 				897AEB801DBA092300B5166E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

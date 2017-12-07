@@ -10,6 +10,7 @@
 #import "UIView+SYExtend.h"
 
 #import "SYMediaPlayerView.h"
+#import "AppDelegate.h"
 #define TopMargin 20
 
 #define MinPlayerHeight (kDWidth / 16 * 9)
@@ -23,7 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    appDelegate.fullScreen = YES;
+
     NSString *mvUrl = @"http://flv2.bn.netease.com/videolib3/1604/28/fVobI0704/SD/fVobI0704-mobile.mp4";
     
     //    _playerView = [[SYMediaPlayerView alloc] initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight) uRL:[NSURL URLWithString:mvUrl] title:@"这是视频标题"];
@@ -34,27 +37,40 @@
     _headerView.backgroundColor=[UIColor redColor];
     [self.view addSubview:_headerView];
     
-    SYMediaPlayerView *playerView=[[SYMediaPlayerView alloc]init];
+    _playerView=[[SYMediaPlayerView alloc]init];
     
     
-    [playerView playerViewWithUrl:mvUrl WithTitle:@"这是视频标题" WithView:_headerView  WithDelegate:self];
+    [_playerView playerViewWithUrl:mvUrl WithTitle:@"这是视频标题" WithView:_headerView  WithDelegate:self];
     
     //    [playerView setHistoryPlayingTime:@"1000"];
     
 }
-
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
+    if ([UIDevice currentDevice].orientation ==UIDeviceOrientationLandscapeLeft||[UIDevice currentDevice].orientation ==UIDeviceOrientationLandscapeRight){
+         UIWindow*window= [UIApplication sharedApplication].keyWindow;
+        _playerView.frame=CGRectMake(0, 0, size.width,size.height);
+        _playerView.player.view.frame=CGRectMake(0, 0, size.width,size.height);
+        _playerView.mediaControl.fullScreenBtn.selected=YES;
+        _playerView.isFullScreen=YES;
+        [window addSubview:_playerView];
+    }else{
+       _playerView.frame=CGRectMake(0, 0, size.width, size.width/16*9);
+       _playerView.player.view.frame=CGRectMake(0, 0, size.width, size.width/16*9);
+        _playerView.mediaControl.fullScreenBtn.selected=NO;
+        _playerView.isFullScreen=NO;
+        [_headerView addSubview:_playerView];
+        
+        
+        
+        
+    }
+}
 
 - (void)playerViewClosed:(SYMediaPlayerView *)player{
     
-    UIApplication *application=[UIApplication sharedApplication];
-    [application setStatusBarOrientation:UIInterfaceOrientationPortrait];
-    application.keyWindow.transform=CGAffineTransformRotate( application.keyWindow.transform, -M_PI_2);
-    application.keyWindow.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    _playerView.frame=CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight);
-    _playerView.player.view.frame=CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight);
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    _playerView.isFullScreen=NO;
-    [_playerView.player pause];
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     
 }
@@ -64,38 +80,16 @@
     
     
     if (fullscreen==YES) {
-        UIApplication *application=[UIApplication sharedApplication];
-        [application setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
-        application.keyWindow.transform=CGAffineTransformRotate( application.keyWindow.transform, M_PI_2);
-        application.keyWindow.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-        _playerView.frame=CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height);
-        _playerView.player.view.frame=CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height);
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+
     }else{
-        UIApplication *application=[UIApplication sharedApplication];
-        [application setStatusBarOrientation:UIInterfaceOrientationPortrait];
-        application.keyWindow.transform=CGAffineTransformRotate( application.keyWindow.transform, -M_PI_2);
-        application.keyWindow.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-        _playerView.frame=CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight);
-        _playerView.player.view.frame=CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight);
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+      
+        NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     }
 }
 
-// 只支持竖屏
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
--(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationPortrait;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,6 +10,7 @@
 		6D6F871F1F14D6FB00B97403 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6F871E1F14D6FB00B97403 /* libc++.1.tbd */; };
 		6D6F87211F14D70A00B97403 /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6F87201F14D70A00B97403 /* libbz2.1.0.tbd */; };
 		6D7D05941F14D9C7004D50F2 /* SYMediaGesturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D7D05931F14D9C7004D50F2 /* SYMediaGesturesView.m */; };
+		8975953C1FD98340004F044E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8975953B1FD9833F004F044E /* Reachability.m */; };
 		897AEB501DBA092300B5166E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AEB4F1DBA092300B5166E /* main.m */; };
 		897AEB531DBA092300B5166E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AEB521DBA092300B5166E /* AppDelegate.m */; };
 		897AEB561DBA092300B5166E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 897AEB551DBA092300B5166E /* ViewController.m */; };
@@ -77,6 +78,8 @@
 		6D6F87201F14D70A00B97403 /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		6D7D05921F14D9C7004D50F2 /* SYMediaGesturesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMediaGesturesView.h; sourceTree = "<group>"; };
 		6D7D05931F14D9C7004D50F2 /* SYMediaGesturesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMediaGesturesView.m; sourceTree = "<group>"; };
+		8975953A1FD9833F004F044E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		8975953B1FD9833F004F044E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		897AEB4B1DBA092300B5166E /* ijkPlayer自定义.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ijkPlayer自定义.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		897AEB4F1DBA092300B5166E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		897AEB511DBA092300B5166E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 			children = (
 				897AEB511DBA092300B5166E /* AppDelegate.h */,
 				897AEB521DBA092300B5166E /* AppDelegate.m */,
+				8975953A1FD9833F004F044E /* Reachability.h */,
+				8975953B1FD9833F004F044E /* Reachability.m */,
 				897AEB541DBA092300B5166E /* ViewController.h */,
 				897AEB551DBA092300B5166E /* ViewController.m */,
 				897AEB571DBA092300B5166E /* Main.storyboard */,
@@ -492,6 +497,7 @@
 				897AEBE41DBA0CC500B5166E /* UIButton+WebCache.m in Sources */,
 				897AEBDC1DBA0CC500B5166E /* NSData+ImageContentType.m in Sources */,
 				897AEBE31DBA0CC500B5166E /* SDWebImagePrefetcher.m in Sources */,
+				8975953C1FD98340004F044E /* Reachability.m in Sources */,
 				897AEBE01DBA0CC500B5166E /* SDWebImageDownloader.m in Sources */,
 				897AEB9B1DBA0BFB00B5166E /* UIView+SYExtend.m in Sources */,
 				897AEBE71DBA0CC500B5166E /* UIImage+WebP.m in Sources */,

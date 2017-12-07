@@ -24,11 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *mvUrl = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8";
+    NSString *mvUrl = @"http://flv2.bn.netease.com/videolib3/1604/28/fVobI0704/SD/fVobI0704-mobile.mp4";
     
-//    _playerView = [[SYMediaPlayerView alloc] initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight) uRL:[NSURL URLWithString:mvUrl] title:@"这是视频标题"];
-//    _playerView.delegate=self;
-//    [self.view addSubview:_playerView];
+    //    _playerView = [[SYMediaPlayerView alloc] initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight) uRL:[NSURL URLWithString:mvUrl] title:@"这是视频标题"];
+    //    _playerView.delegate=self;
+    //    [self.view addSubview:_playerView];
     
     _headerView =[[UIView alloc]initWithFrame:CGRectMake(0, TopMargin, kDWidth, MinPlayerHeight)];
     _headerView.backgroundColor=[UIColor redColor];
@@ -37,9 +37,9 @@
     SYMediaPlayerView *playerView=[[SYMediaPlayerView alloc]init];
     
     
-    
     [playerView playerViewWithUrl:mvUrl WithTitle:@"这是视频标题" WithView:_headerView  WithDelegate:self];
     
+    //    [playerView setHistoryPlayingTime:@"1000"];
     
 }
 
@@ -101,5 +101,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

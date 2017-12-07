@@ -43,7 +43,7 @@
 @property (nonatomic, assign) BOOL              shouldAutoplay;
 @property (nonatomic, assign) BOOL              isFullScreen;
 @property (nonatomic, assign) BOOL              pushPlayerPause;//是否push到下个界面
-
+@property (nonatomic, assign) NSString  *     historyPlayingTime;//历史播放时间
 
 
 - (instancetype)initWithFrame:(CGRect)frame uRL:(NSURL *)url title:(NSString *)title;

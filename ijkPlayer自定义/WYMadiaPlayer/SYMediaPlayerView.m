@@ -9,6 +9,7 @@
 #import "SYMediaPlayerView.h"
 #import "UIView+SYExtend.h"
 #import "UIImageView+WebCache.h"
+#import "Reachability.h"
 #define IMAGE_PlaceHolder @"Default"
 @interface SYMediaPlayerView()<SYMediaControlDelegate>
 
@@ -66,7 +67,7 @@
     [self.view addSubview:self.mediaControl];
     [view addSubview:self];
     self.delegate=viewController;
-    [self onClickPlayButton:nil];
+//    [self onClickPlayButton:nil];
 }
 -(void)setTitle:(NSString *)title{
     _title=title;
@@ -395,6 +396,10 @@
         [self.player pause];
     }
     
+    if (self.historyPlayingTime) {
+     [self.player setCurrentPlaybackTime:[self.historyPlayingTime integerValue]];
+    }
+
     
 }
 
@@ -429,9 +434,39 @@
                                              selector:@selector(moviePlayFirstVideoFrameRendered:)
                                                  name:IJKMPMoviePlayerFirstVideoFrameRenderedNotification
                                                object:_player];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(networkStateChange) name:kReachabilityChangedNotification object:nil];
+    // 创建Reachability
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
     
+    // 开始监控网络(一旦网络状态发生改变, 就会发出通知kReachabilityChangedNotification)
+    [reachability startNotifier];
 }
-
+- (void)networkStateChange
+{
+    // 1.检测网络状态
+    Reachability *wifi = [Reachability reachabilityForLocalWiFi];
+    
+    // 2.检测手机是否能上网络
+    Reachability *connect = [Reachability reachabilityForInternetConnection];
+    
+    // 3.判断网络状态
+    if ([wifi currentReachabilityStatus] != NotReachable) {
+        NSLog(@"有wifi");
+    }
+    else if ([connect currentReachabilityStatus] != NotReachable) {
+        NSLog(@"使用手机自带网络进行上网");
+        
+        UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:@"提示" message:@"当前使用移动网络是否继续播放" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+        
+    }
+    else {
+        UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:@"提示" message:@"似乎已经断开连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+        NSLog(@"没有网络");
+    }
+}
 #pragma mark Remove Movie Notification Handlers
 
 /* Remove the movie notification observers from the movie object. */
